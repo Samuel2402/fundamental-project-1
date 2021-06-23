@@ -7,7 +7,7 @@ class Store(db.Model):
     shop_postcode = db.Column(db.String(30))
     distance_to_travel = db.Column(db.Float)
     takeaway = db.Column(db.Boolean)
-    reciepts = db.relationship('Receipts', backref= 'Store')
+    reciepts = db.relationship('Receipts', backref= 'store')
     
 class Receipts(db.Model):
     receipt_id = db.Column(db.Integer, primary_key=True)
