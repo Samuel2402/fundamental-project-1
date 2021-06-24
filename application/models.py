@@ -21,11 +21,11 @@ class Receipts(db.Model):
     store_id = db.Column(db.Integer, db.ForeignKey('store.store_id'), nullable=False)
     
 
-#class Shoppin_stats(db.Model):
-#    stat_id = db.Column(db.Integer, primary_key=True)
-#    total_spent = 
-#    most_exp =
-#    store_id =
+class Shopping_stats(db.Model):
+    stat_id = db.Column(db.Integer, primary_key=True)
+    total_spent = db.Column(db.Integer)
+    most_exp = db.Column(db.Integer)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id'), nullable=False)
 
 
 
