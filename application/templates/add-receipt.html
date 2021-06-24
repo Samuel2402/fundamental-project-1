@@ -1,0 +1,27 @@
+
+<html>
+    <head>
+        <title>Add Reciept to database:</title>
+    </head>
+    <body>
+        <div class='form'>
+            <form method='POST' action=''>
+                {{ form.hidden_tag() }}
+                {{ form.most_expensive.label }} {{ form.most_expensive }}
+                <br>
+                {{ form.cost_of_alcohol.label }} {{ form.cost_of_alcohol }}
+                <br>
+                {{ form.receipt_total.label }} {{ form.receipt_total }}
+                <br>
+                {{ form.takeaway.label }} {{ form.takeaway }}
+                <br>
+                {{ form.delivery_fee.label }} {{ form.delivery_fee }}
+                <br>
+                {{ form.delivery_time_mins.label }} {{ form.delivery_time_mins }}
+                <br>
+                {{ form.submit }}
+                {{ message }}
+            </form>
+        </div>
+    </body>
+</html>
