@@ -42,9 +42,9 @@ def add_receipt():
         elif len(store)==0:
             error =  "please enter a valid store name"
         else:
-            mystore = Store.query.filter_by(name=form.store.data.lower).first()
-            print(mystore)
-            new = Receipts(most_expensive=most_expensive, cost_of_alcohol=cost_of_alcohol, date_of_reciept=date_of_reciept, receipt_total=receipt_total, takeaway=takeaway, delivery_fee=delivery_fee, delivery_time_mins=delivery_time_mins, store=store, shop=mystore)
+            shop_ref = Store.query.filter_by(name=store.lower).first()
+            #mystore = add_receipt.query.filter_by(name=form.store.data.lower).first()
+            new = Receipts(most_expensive=most_expensive, cost_of_alcohol=cost_of_alcohol, date_of_reciept=date_of_reciept, receipt_total=receipt_total, takeaway=takeaway, delivery_fee=delivery_fee, delivery_time_mins=delivery_time_mins, store=store, shop=shop_ref)
             db.session.add(new)
             db.session.commit()
             return 'Receipt added!'
@@ -83,20 +83,27 @@ def add_store():
 #        games_string += "<br>"+ game.name
 #    return games_string
 
+#@app.route('/read-store')
+
 ############################### update #####################################
 
-#@app.route('/update/<name>')
+#@app.route('/update-receipt')
 #def update(name):
 #    first_game = Games.query.first()
 #    first_game.name = name
 #    db.session.commit()
 #    return first_game.name
 
+#@app.route('/update-store')
+
 ############################### delete #####################################
+
+#@app_route(/delete-receipt)
+
+#@app_route(/delete-store)
+
+################################### end ###########################################
 
 print('============================== after_routes ==================================')
 
 from application import validators
-
-################################### end ###########################################
-
