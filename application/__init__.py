@@ -31,7 +31,7 @@ class ReceiptForm(FlaskForm):
     submit = SubmitField('Submit Receipt')
 
 class StoreForm(FlaskForm):
-    shop_name = StringField('Enter Store Name:', maxlength=30, validators=[DataRequired()])
+    name = StringField('Enter Store Name:', maxlength=30, validators=[DataRequired()])
     shop_address = StringField('Enter Store Address:', maxlength=50, validators=[DataRequired()])
     shop_postcode = StringField('Enter Store Postcode:', maxlength=10, validators=[DataRequired()])
     distance_to_travel = DecimalField('Distance to travel to store (Kilometers):', validators=[DataRequired(), decimal_places()])
