@@ -3,17 +3,21 @@ from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from application.models import Receipts, Store#, Shopping_stats
-from application import ReceiptForm
+from application.forms import ReceiptForm, StoreForm
 ################################# routes #########################################
 
 print('=============================== app_route ====================================')
+
+################################# home ######################################
 
 @app.route('/')
 @app.route('/home')
 def hpme(): 
     return "Home page"
 
-@app.route('/add', methods=['GET', 'POST'])
+################################ create #####################################
+
+@app.route('/add-receipt', methods=['GET', 'POST'])
 def add_receipt():
     error = ""
     form = ReceiptForm()
@@ -25,21 +29,72 @@ def add_receipt():
         takeaway = form.takeaway.data
         delivery_fee = form.delivery_fee.data
         delivery_time_mins = form.delivery_time_mins.data
+        store = form.store.data
 
-        if len(most_expensive)==0:
+        if len(str(most_expensive).rsplit('.')[-1]) == 1:
             error = "please enter a valid number in form: 16.00"
-        elif len(date_of_reciept) != 8: #YY/MM/DD
+        elif len(str(date_of_reciept)) == 0: #YY/MM/DD
             error = "Please enter a valid date in the form YY/MM/DD"
-        elif len(receipt_total) == 0 or receipt_total == 0:
+        elif len(str(receipt_total)) == 0 or receipt_total == 0:
             error = "Receipt total cannot be 0 or empty"
-        elif takeaway==True and len(takeaway) == 0:
+        elif takeaway==True and len(str(takeaway)) == 0:
             error = "Please enter delivery fee"
+        elif len(store)==0:
+            error =  "please enter a valid store name"
         else:
+            mystore = Store.query.filter_by(name=form.store.data.lower).first()
+            print(mystore)
+            new = Receipts(most_expensive=most_expensive, cost_of_alcohol=cost_of_alcohol, date_of_reciept=date_of_reciept, receipt_total=receipt_total, takeaway=takeaway, delivery_fee=delivery_fee, delivery_time_mins=delivery_time_mins, store=store, shop=mystore)
+            db.session.add(new)
+            db.session.commit()
             return 'Receipt added!'
-    return render_template('add.html', form=form, message=error)
+    return render_template('add-receipt.html', form=form, message=error)
 
+@app.route('/add-store', methods=['GET', 'POST'])
+def add_store():
+    error = ""
+    form = StoreForm()
+    if request.method == 'POST':
+        name = form.name.data
+        shop_address = form.shop_address.data
+        shop_postcode = form.shop_postcode.data
+        takeaway = form.takeaway.data
 
-print('============================== after_route ===================================')
+        if len(name)==2:
+            error = "please enter a valid store name"
+        elif len(shop_address) == 0: #YY/MM/DD
+            error = "Please enter a valid address"
+        elif len(shop_postcode) == 0:
+            error = "Please enter a valid Postcode"
+        else:
+            new = Store(name=name, shop_address=shop_address, shop_postcode=shop_postcode, takeaway=takeaway)
+            db.session.add(new)
+            db.session.commit()
+            return 'Store added!'
+    return render_template('add-store.html', form=form, message=error)
+
+################################# read #####################################
+
+#@app.route('/read-receipt')
+#def read():
+#    all_games = Games.query.all()
+#    games_string = ""
+#    for game in all_games:
+#        games_string += "<br>"+ game.name
+#    return games_string
+
+############################### update #####################################
+
+#@app.route('/update/<name>')
+#def update(name):
+#    first_game = Games.query.first()
+#    first_game.name = name
+#    db.session.commit()
+#    return first_game.name
+
+############################### delete #####################################
+
+print('============================== after_routes ==================================')
 
 from application import validators
 

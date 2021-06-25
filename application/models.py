@@ -1,5 +1,7 @@
 from application import db
 
+print("============================ Before Models.py ================================")
+
 class Store(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(30), unique=True, nullable=False)
@@ -26,7 +28,7 @@ class Receipts(db.Model):
 #    store_id = db.Column(db.Integer, db.ForeignKey('receipts.store_id'), nullable=False)
 
 
-
+print("============================= after Models.py ================================")
 
 
 

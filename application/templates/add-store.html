@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Add Reciept to database:</title>
+    </head>
+    <body>
+        <div class='form'>
+            <form method='POST' action=''>
+                {{ form.hidden_tag() }}
+                {{ form.name.label }} {{ form.name }}
+                <br>
+                {{ form.shop_address.label }} {{ form.shop_address }}
+                <br>
+                {{ form.shop_postcode.label }} {{ form.shop_postcode }}
+                <br>
+                {{ form.takeaway.label }} {{ form.takeaway }}
+                <br>
+                {{ form.submit }}
+                {{ message }}
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,11 +1,8 @@
-from flask import Flask, render_template, request
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DecimalField, DateField, BooleanField, IntegerField
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from os import getenv
-from application.validators import decimal_places
-from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
 
@@ -19,27 +16,9 @@ app.config['SECRET_KEY'] = SECRET_KEY
 db = SQLAlchemy(app)
 
 ################################# Forms #############################################
-
-class ReceiptForm(FlaskForm):
-    most_expensive = DecimalField('Enter most expensive item:', validators=[DataRequired()]) 
-    cost_of_alcohol = DecimalField('Input price of alcohol:', validators=[decimal_places()])
-    date_of_reciept = DateField('Input Date:', validators=[DataRequired()])
-    receipt_total = DecimalField('Input total cost after deductions:', validators=[DataRequired(), decimal_places()])
-    takeaway = BooleanField()
-    delivery_fee = DecimalField('Delivery fee (leave blank if n/a)', validators=[decimal_places()])
-    delivery_time_mins = IntegerField('Delivery time (min):', validators=[DataRequired()])
-    submit = SubmitField('Submit Receipt')
-
-class StoreForm(FlaskForm):
-    name = StringField('Enter Store Name:', maxlength=30, validators=[DataRequired()])
-    shop_address = StringField('Enter Store Address:', maxlength=50, validators=[DataRequired()])
-    shop_postcode = StringField('Enter Store Postcode:', maxlength=10, validators=[DataRequired()])
-    distance_to_travel = DecimalField('Distance to travel to store (Kilometers):', validators=[DataRequired(), decimal_places()])
-    takeaway = BooleanField()
-    submit = SubmitField('Submit Store information')
-
-print('================================ app.py ======================================')
-
+from application import forms
 ################################# routes ############################################
 from application import routes
-################################## end ##############################################
+############################### validators ##########################################
+
+################################### end #############################################
