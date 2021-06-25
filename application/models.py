@@ -33,4 +33,6 @@ class Receipts(db.Model):
 
 
 
+
+
  
