@@ -12,7 +12,7 @@ receipt1 = Receipts(most_expensive=5.09, cost_of_alcohol=0, date_of_reciept='202
 receipt2 = Receipts(most_expensive=2.80, cost_of_alcohol=16, date_of_reciept='2021/03/15', receipt_total=11.90, store=tesco, shop=tesco)
 receipt3 = Receipts(most_expensive=3.00, cost_of_alcohol=0, date_of_reciept='2021/05/03', receipt_total=18.76, store=tesco, shop=tesco)
 receipt4 = Receipts(most_expensive=2.00, cost_of_alcohol=0, date_of_reciept='2021/01/02', receipt_total=20.91, store=tesco, shop=tesco)
-
+#creating lists
 store_list = [mcdonalds, tesco]
 receipt_list = [receipt1, receipt2, receipt3, receipt4]
 

@@ -11,13 +11,13 @@ print('=============================== app_route ===============================
 ################################# home ######################################
 
 @app.route('/')
-@app.route('/home')
-def hpme(): 
-    return "Home page"
+@app.route('/newhome')
+def home(): 
+    return render_template('newhome.html')
 
 ################################ create #####################################
 
-@app.route('/add-receipt', methods=['GET', 'POST'])
+@app.route('/addreceipt', methods=['GET', 'POST'])
 def add_receipt():
     error = ""
     form = ReceiptForm()
@@ -32,13 +32,15 @@ def add_receipt():
         store = form.store.data
 
         if len(str(most_expensive).rsplit('.')[-1]) == 1:
-            error = "please enter a valid number in form: 16.00"
+            error = "Please enter a valid 'most expensive' in form: 16.00"
         elif len(str(date_of_reciept)) == 0: #YY/MM/DD
             error = "Please enter a valid date in the form YY/MM/DD"
         elif len(str(receipt_total)) == 0 or receipt_total == 0:
             error = "Receipt total cannot be 0 or empty"
-        elif takeaway==True and len(str(takeaway)) == 0:
+        elif takeaway==True and len(str(delivery_fee)) == 0:
             error = "Please enter delivery fee"
+        elif takeaway==True and len(str(delivery_time_mins)) == 0:
+            error = "Please enter delivery time"
         elif len(store)==0:
             error =  "please enter a valid store name"
         else:
@@ -48,9 +50,9 @@ def add_receipt():
             db.session.add(new)
             db.session.commit()
             return 'Receipt added!'
-    return render_template('add-receipt.html', form=form, message=error)
+    return render_template('addreceipt.html', form=form, message=error)
 
-@app.route('/add-store', methods=['GET', 'POST'])
+@app.route('/addstore', methods=['GET', 'POST'])
 def add_store():
     error = ""
     form = StoreForm()
@@ -71,18 +73,21 @@ def add_store():
             db.session.add(new)
             db.session.commit()
             return 'Store added!'
-    return render_template('add-store.html', form=form, message=error)
+    return render_template('addstore.html', form=form, message=error)
 
 ################################# read #####################################
 
-#@app.route('/read-receipt')
-#def read():
-#    all_games = Games.query.all()
-#    games_string = ""
-#    for game in all_games:
-#        games_string += "<br>"+ game.name
-#    return games_string
+@app.route('/readreceipts', methods=['GET'])
+def read_receipts():
+    #Receipts.query.all()
+    receipts_string = ""
+    all_receipts = Receipts.query.all()
+    for receipts in all_receipts:
+        receipts_string += "<br>" + str(receipts.most_expensive) + "    |    " + str(receipts.cost_of_alcohol) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.receipt_total) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.takeaway) + "    |    " + str(receipts.delivery_fee) + "    |    " + str(receipts.delivery_time_mins) +" min's" + "    |    " + str(receipts.store) 
+    return render_template('readreceipts.html') + receipts_string
 
+
+#Receipts.query.order_by(Reveipts.store).all()
 #@app.route('/read-store')
 
 ############################### update #####################################

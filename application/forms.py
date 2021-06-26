@@ -4,6 +4,8 @@ from wtforms import StringField, SubmitField, DecimalField, DateField, BooleanFi
 from application.validators import decimal_places, name_validator
 from wtforms.validators import DataRequired
 
+
+
 class ReceiptForm(FlaskForm):
     most_expensive = DecimalField('Enter most expensive item:', validators=[DataRequired()]) 
     cost_of_alcohol = DecimalField('Input price of alcohol:', validators=[decimal_places()])
@@ -23,4 +25,3 @@ class StoreForm(FlaskForm):
     takeaway = BooleanField()
     submit = SubmitField('Submit Store information')
 
-print('================================ app.py ======================================')
