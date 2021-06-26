@@ -4,7 +4,7 @@ from wtforms import StringField, SubmitField, DecimalField, DateField, BooleanFi
 from application.validators import decimal_places, name_validator
 from wtforms.validators import DataRequired
 
-
+#################################### create ###################################
 
 class ReceiptForm(FlaskForm):
     most_expensive = DecimalField('Enter most expensive item:', validators=[DataRequired()]) 
@@ -25,3 +25,18 @@ class StoreForm(FlaskForm):
     takeaway = BooleanField()
     submit = SubmitField('Submit Store information')
 
+################################## update ##################################
+
+class UpdateForm(FlaskForm):
+    id = IntegerField('receipt id', validators=[DataRequired()])
+    most_expensive = DecimalField('Enter most expensive item:', validators=[DataRequired()]) 
+    cost_of_alcohol = DecimalField('Input price of alcohol:', validators=[decimal_places()])
+    date_of_reciept = DateField('Input date (YY/MM/DD):', validators=[DataRequired()])
+    receipt_total = DecimalField('Input total cost after deductions:', validators=[DataRequired(), decimal_places()])
+    takeaway = BooleanField()
+    delivery_fee = DecimalField('Delivery fee (leave blank if n/a)', validators=[decimal_places()])
+    delivery_time_mins = IntegerField('Delivery time (min):', validators=[DataRequired()])
+    store = StringField('Store name:', validators=[name_validator()])
+    submit = SubmitField('Submit Receipt')
+
+print('================================ app.py ======================================')

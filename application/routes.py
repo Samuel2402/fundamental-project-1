@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from application.models import Receipts, Store#, Shopping_stats
-from application.forms import ReceiptForm, StoreForm
+from application.forms import ReceiptForm, StoreForm, UpdateForm
 ################################# routes #########################################
 
 print('=============================== app_route ====================================')
@@ -79,26 +79,55 @@ def add_store():
 
 @app.route('/readreceipts', methods=['GET'])
 def read_receipts():
-    #Receipts.query.all()
     receipts_string = ""
     all_receipts = Receipts.query.all()
     for receipts in all_receipts:
-        receipts_string += "<br>" + str(receipts.most_expensive) + "    |    " + str(receipts.cost_of_alcohol) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.receipt_total) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.takeaway) + "    |    " + str(receipts.delivery_fee) + "    |    " + str(receipts.delivery_time_mins) +" min's" + "    |    " + str(receipts.store) 
+        receipts_string += "<br>" + str(receipts.id) + "    |    " + str(receipts.most_expensive) + "    |    " + str(receipts.cost_of_alcohol) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.receipt_total) + "    |    " + str(receipts.date_of_reciept) + "    |    " + str(receipts.takeaway) + "    |    " + str(receipts.delivery_fee) + "    |    " + str(receipts.delivery_time_mins) +" min's" + "    |    " + str(receipts.store) 
     return render_template('readreceipts.html') + receipts_string
 
-
-#Receipts.query.order_by(Reveipts.store).all()
-#@app.route('/read-store')
+#@app.route('/readstore')
 
 ############################### update #####################################
 
-#@app.route('/update-receipt')
-#def update(name):
-#    first_game = Games.query.first()
-#    first_game.name = name
-#    db.session.commit()
-#    return first_game.name
+@app.route('/updatereceipt', methods=['GET', 'POST', 'UPDATE'])
+def update_receipt():
+    error = ""
+    form = UpdateForm()
+    if request.method == "GET" or "POST" or 'UPDATE':
+        id = form.id.data
+        most_expensive = form.most_expensive.data
+        cost_of_alcohol = form.cost_of_alcohol.data
+        date_of_reciept = form.date_of_reciept.data
+        receipt_total = form.receipt_total.data
+        takeaway = form.takeaway.data
+        delivery_fee = form.delivery_fee.data
+        delivery_time_mins = form.delivery_time_mins.data
+        store = form.store.data
 
+        if id == "":
+            error = "enter receipt id"
+        if len(str(most_expensive).rsplit('.')[-1]) == 1:
+            error = "Please enter a valid 'most expensive' in form: 16.00"
+        elif len(str(date_of_reciept)) == 0: #YY/MM/DD
+            error = "Please enter a valid date in the form YY/MM/DD"
+        elif len(str(receipt_total)) == 0 or receipt_total == 0:
+            error = "Receipt total cannot be 0 or empty"
+        elif takeaway==True and len(str(delivery_fee)) == 0:
+            error = "Please enter delivery fee"
+        elif takeaway==True and len(str(delivery_time_mins)) == 0:
+            error = "Please enter delivery time"
+        elif len(str(store))==0:
+            error = 'please enter valid store name'
+        else:
+            shop_ref = Store.query.filter_by(name=form.store.data).first()
+            receipt_id = Receipts.query.get(form.id.data)
+            update = Receipts(most_expensive=most_expensive, cost_of_alcohol=cost_of_alcohol, date_of_reciept=date_of_reciept, receipt_total=receipt_total, takeaway=takeaway, delivery_fee=delivery_fee, delivery_time_mins=delivery_time_mins, store=store, shop=shop_ref)
+            db.session.commit()
+            return render_template('updatereceipt.html', form=form, message=error)
+        return 'receipt updated' 
+
+   
+            
 #@app.route('/update-store')
 
 ############################### delete #####################################
