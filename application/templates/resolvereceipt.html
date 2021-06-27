@@ -1,14 +1,19 @@
-<html>
+{% extends "layout.html" %}
+{% block body %}<html>
     <head>
-        <title>Add Reciept to database:</title>
+        <p>Edit reciept in database:</p>
     </head>
     <body>
         <div class='form'>
             <form method='POST' action=''>
                 {{ form.hidden_tag() }}
+                {{ form.id.label }} {{ form.id }}
+                <br>
                 {{ form.most_expensive.label }} {{ form.most_expensive }}
                 <br>
                 {{ form.cost_of_alcohol.label }} {{ form.cost_of_alcohol }}
+                <br>
+                {{ form.date_of_receipt.label }} {{ form.date_of_receipt }}
                 <br>
                 {{ form.receipt_total.label }} {{ form.receipt_total }}
                 <br>
@@ -18,9 +23,11 @@
                 <br>
                 {{ form.delivery_time_mins.label }} {{ form.delivery_time_mins }}
                 <br>
+                {{ form.store_id.label }} {{ form.store_id }}
+                <br>
                 {{ form.submit }}
                 {{ message }}
             </form>
         </div>
     </body>
-</html>
+{% endblock body %}

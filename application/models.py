@@ -1,25 +1,25 @@
 from application import db
 
+print("============================ Before Models.py ================================")
+
 class Store(db.Model):
-    store_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    shop_name = db.Column(db.String(50))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(30), nullable=False)
     shop_address = db.Column(db.String(100))
     shop_postcode = db.Column(db.String(30))
-    distance_to_travel = db.Column(db.Float)
     takeaway = db.Column(db.Boolean)
-    reciepts = db.relationship('Receipts', backref= 'store')
-    
+    receipt = db.relationship('Receipts', backref='shop')
+
 class Receipts(db.Model):
-    receipt_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     most_expensive = db.Column(db.Float)
     cost_of_alcohol = db.Column(db.Float)
-    date_of_reciept = db.Column(db.DateTime)
+    date_of_receipt = db.Column(db.DateTime)
     receipt_total = db.Column(db.Float)
     takeaway = db.Column(db.Boolean)
     delivery_fee = db.Column(db.Float)
     delivery_time_mins = db.Column(db.Integer)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id'), nullable=False)
-    
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), nullable=False)
 
 #class Shopping_stats(db.Model):
 #    stat_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -28,9 +28,7 @@ class Receipts(db.Model):
 #    store_id = db.Column(db.Integer, db.ForeignKey('receipts.store_id'), nullable=False)
 
 
-
-
-
+print("============================= after Models.py ================================")
 
 
 
