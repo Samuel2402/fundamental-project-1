@@ -5,6 +5,12 @@ from flask_testing import TestCase
 from application import app, db
 from application.models import Receipts, Store
 
+#validations
+# from flask_testing import LiveServerTestCase
+# from selenium import webdriver
+# from urllib.request import urlopen
+# from flask import url_for
+
 #base class
 class TestBase(TestCase):
     def create_app(self):
@@ -49,6 +55,11 @@ class TestBase(TestCase):
 
         db.session.remove()
         db.drop_all()
+
+    # def test_server_running(self):
+    #     TEST_PORT = 5000
+    #     response = urlopen(f'http://localhost:{self.TEST_PORT}')
+    #     self.assertEqual(response.code, 200)
 
 ################################################## test read ##################################################################
 
@@ -117,10 +128,39 @@ class TestAdd(TestBase):
 #         self.assertIn(b'receipt updated',response.data)
 
     
+################################################## selenium #######################################################################
+
+# class TestEmpty(TestBase):
+#     def test_empty_most_exp_validation(self):
+#         self.submit_input('')
+#         self.assertIn(url_for('add_receipt'), self.driver.current_url)
+
+#         text = self.driver.find_element_by_xpath('<//*[@id="most_expensive"]>').text
+#         self.assertIn("cannot be empty", text)
+
+#         entries = Receipts.query.all()
+#         self.assertEqual(len(Receipties), 0) #database needs to be empty!!!!
+
+#     def submit_input_ receipts(self, case): # custom method
+#         self.driver.find_element_by_xpath('//*[@id="name"]').send_keys(case)
+#         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
 
 
-    
 
+# class decimal_places:
 
+#     def validate_most_expensive(self,message=None):
+#         if not message:
+#             message = "Please enter a valid price range in the form: 16.00"
+#         self.message = message   
+#     def __call__(self, form, field):
+#         if len(field.data.rsplit('.')[-1]) != 2:
+#             raise ValidationError(self.message)
 
+# class name_validator:
 
+#     def __call__(self, store):
+#         store_list =[tesco, mcdonalds] 
+#         for i in store_list:
+#             if store.data.lower != i:
+#                 raise ValidationError("Please enter a valid store name")

@@ -14,7 +14,7 @@ class decimal_places:
 
 class name_validator:
     def __call__(self, store):
-        store_list =[tesco, mcdonalds] 
+        store_list =[tesco, mcdonalds, coop] 
         for i in store_list:
             if store.data.lower != i:
                 raise ValidationError("Please enter a valid store name")

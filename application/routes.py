@@ -1,5 +1,5 @@
 from application import db, app
-from flask import Flask, render_template, request
+from flask import redirect, url_for, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -36,6 +36,8 @@ def add_receipt():
             error = "Please enter a valid 'most expensive' in form: 16.00"
         elif len(str(date_of_receipt)) == 0: #YY/MM/DD
             error = "Please enter a valid date in the form YY/MM/DD"
+        elif len(str(receipt_total).rsplit('.')[-1]) == 1:
+            error = "Please enter a valid 'Total cost' in form: 16.00"
         elif len(str(receipt_total)) == 0 or receipt_total == 0:
             error = "Receipt total cannot be 0 or empty"
         elif takeaway==True and len(str(delivery_fee)) == 0:
@@ -108,6 +110,7 @@ def resolve_receipt():
         delivery_fee = form.delivery_fee.data
         delivery_time_mins = form.delivery_time_mins.data
         store_id = form.store_id.data
+
         if len(str(most_expensive).rsplit('.')[-1]) == 1:
             error = "Please enter a valid 'most expensive' in form: 16.00"
         elif len(str(date_of_receipt)) == 0: #YY/MM/DD
@@ -140,17 +143,14 @@ def resolve_receipt():
 
 @app.route('/deletereceipt', methods=['GET', 'POST'])
 def delete_receipt():
-    error = ""
     form = DeleteForm()
     if request.method == 'POST':
-        if id == "":
-            error = "enter receipt id"
-        else:
+        if form.validate_on_submit():
             receipt_del = Receipts.query.filter_by(id=form.id.data).first()
             db.session.delete(receipt_del)
             db.session.commit()
             return 'receipt deleted' 
-    return render_template('deletereceipt.html', form=form, message=error)
+    return render_template('deletereceipt.html', form=form)
 
 ################################### end ###########################################
 
