@@ -14,7 +14,7 @@ class Receipts(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     most_expensive = db.Column(db.Float)
     cost_of_alcohol = db.Column(db.Float)
-    date_of_reciept = db.Column(db.DateTime)
+    date_of_receipt = db.Column(db.DateTime)
     receipt_total = db.Column(db.Float)
     takeaway = db.Column(db.Boolean)
     delivery_fee = db.Column(db.Float)

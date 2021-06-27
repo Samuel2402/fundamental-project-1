@@ -1,5 +1,17 @@
-<html>
+{% extends "layout.html" %}
+{% block body %}
     <head>
         <p>Remove reciepts from database:</p>
     </head>
-<html>
+    <body>
+        <div class='form'>
+            <form method='POST' action=''>
+                {{ form.hidden_tag() }}
+                {{ form.id.label }} {{ form.id }}
+                &nbsp;
+                {{ form.submit }}
+                {{ message }}
+            </form>
+        </div>
+    </body>
+{% endblock body %}

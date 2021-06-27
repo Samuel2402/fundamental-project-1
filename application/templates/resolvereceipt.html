@@ -1,4 +1,5 @@
-<html>
+{% extends "layout.html" %}
+{% block body %}<html>
     <head>
         <p>Edit reciept in database:</p>
     </head>
@@ -12,7 +13,7 @@
                 <br>
                 {{ form.cost_of_alcohol.label }} {{ form.cost_of_alcohol }}
                 <br>
-                {{ form.date_of_reciept.label }} {{ form.date_of_reciept }}
+                {{ form.date_of_receipt.label }} {{ form.date_of_receipt }}
                 <br>
                 {{ form.receipt_total.label }} {{ form.receipt_total }}
                 <br>
@@ -29,4 +30,4 @@
             </form>
         </div>
     </body>
-</html>
+{% endblock body %}
