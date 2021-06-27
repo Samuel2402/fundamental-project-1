@@ -5,7 +5,7 @@
     </head>
     <body>
         <div class='form'>
-            <form method='UPDATE' action='POST'>
+            <form method='POST' action=''>
                 {{ form.hidden_tag() }}
                 {{ form.id.label }} {{ form.id }}
                 <br>
@@ -23,7 +23,7 @@
                 <br>
                 {{ form.delivery_time_mins.label }} {{ form.delivery_time_mins }}
                 <br>
-                {{ form.store.label }} {{ form.store }}
+                {{ form.store_id.label }} {{ form.store_id }}
                 <br>
                 {{ form.submit }}
                 {{ message }}

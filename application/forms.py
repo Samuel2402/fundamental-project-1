@@ -14,7 +14,7 @@ class ReceiptForm(FlaskForm):
     takeaway = BooleanField()
     delivery_fee = DecimalField('Delivery fee (leave blank if n/a)', validators=[decimal_places()])
     delivery_time_mins = IntegerField('Delivery time (min):', validators=[DataRequired()])
-    store = StringField('Store name:', validators=[name_validator()])
+    store_id = IntegerField('Store id:', validators=[DataRequired()])
     submit = SubmitField('Submit Receipt')
 
 class StoreForm(FlaskForm):
@@ -34,9 +34,9 @@ class ResolveForm(FlaskForm):
     date_of_receipt = DateField('Input date (YY/MM/DD):', validators=[DataRequired()])
     receipt_total = DecimalField('Input total cost after deductions:', validators=[DataRequired(), decimal_places()])
     takeaway = BooleanField()
-    delivery_fee = DecimalField('Delivery fee (leave blank if n/a)', validators=[decimal_places()])
+    delivery_fee = DecimalField('Delivery fee:', validators=[decimal_places()])
     delivery_time_mins = IntegerField('Delivery time (min):', validators=[DataRequired()])
-    store = StringField('Store name:', validators=[name_validator()])
+    store_id = StringField('Store id:', validators=[DataRequired()])
     submit = SubmitField('Submit Receipt')
 
 ##################################### delete #########################################

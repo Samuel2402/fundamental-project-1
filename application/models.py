@@ -4,7 +4,7 @@ print("============================ Before Models.py ===========================
 
 class Store(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(30), unique=True, nullable=False)
+    name = db.Column(db.String(30), nullable=False)
     shop_address = db.Column(db.String(100))
     shop_postcode = db.Column(db.String(30))
     takeaway = db.Column(db.Boolean)
@@ -19,7 +19,7 @@ class Receipts(db.Model):
     takeaway = db.Column(db.Boolean)
     delivery_fee = db.Column(db.Float)
     delivery_time_mins = db.Column(db.Integer)
-    store = db.Column(db.String(30), db.ForeignKey('store.name'), nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), nullable=False)
 
 #class Shopping_stats(db.Model):
 #    stat_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

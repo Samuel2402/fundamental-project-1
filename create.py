@@ -9,10 +9,10 @@ mcdonalds = Store(name='mcdonalds', shop_address='63 Northbrook st', shop_postco
 tesco = Store(name='tesco', shop_address='London rd, Newbury', shop_postcode='rg14 2bp', takeaway=False)
 coop = Store(name='coop', shop_address='Andover rd', shop_postcode='rg19 3bp', takeaway=False)
 #adding receipts to db
-receipt1 = Receipts(most_expensive=5.09, cost_of_alcohol=0, date_of_receipt='2021/06/23', receipt_total=11.36, takeaway=True, delivery_fee=1.99, delivery_time_mins=28, store='mcdonalds', shop=mcdonalds)
-receipt2 = Receipts(most_expensive=2.80, cost_of_alcohol=16, date_of_receipt='2021/03/15', receipt_total=11.90, store=tesco, shop=tesco)
-receipt3 = Receipts(most_expensive=3.00, cost_of_alcohol=0, date_of_receipt='2021/05/03', receipt_total=18.76, store=tesco, shop=tesco)
-receipt4 = Receipts(most_expensive=2.00, cost_of_alcohol=0, date_of_receipt='2021/01/02', receipt_total=20.91, store=tesco, shop=tesco)
+receipt1 = Receipts(most_expensive=5.09, cost_of_alcohol=0, date_of_receipt='2021/06/23', receipt_total=11.36, takeaway=True, delivery_fee=1.99, delivery_time_mins=28, store_id=1, shop=mcdonalds)
+receipt2 = Receipts(most_expensive=2.80, cost_of_alcohol=16, date_of_receipt='2021/03/15', receipt_total=11.90, store_id=2, shop=tesco)
+receipt3 = Receipts(most_expensive=3.00, cost_of_alcohol=0, date_of_receipt='2021/05/03', receipt_total=18.76, store_id=2, shop=tesco)
+receipt4 = Receipts(most_expensive=2.00, cost_of_alcohol=0, date_of_receipt='2021/01/02', receipt_total=20.91, store_id=2, shop=tesco)
 #creating lists
 store_list = [mcdonalds, tesco]
 receipt_list = [receipt1, receipt2, receipt3, receipt4]
