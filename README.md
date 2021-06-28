@@ -103,12 +103,34 @@ Tests cover:
   - Testing Read for all available pages
   - Testing Add for Add Store & Add Receipt
 
-requires further testing before deployment including
+Requires further testing before deployment including
  - Update and Delete tests working
  - Selenium used for integration testing
  - Port testing
 
- 
+Current test coverage
+
+![test coverage](./images/test-coverage.jpg)
+
+Test coverage is currently too low for deployment and needs to be improved.
+
+# Jenkins
+Jenkins is being utilised to setup and deploy working versions of my app and is working in its current state.
+Script was added, with permissions changed to execute and run. After logging in successfully i created my build. Furthermore i had to edit my sudo visudo to add jenkins permissions before it would run successfully
+
+![jenkins working](./images/jenkins1.jpg)
+
+My db instance is used in execute bash shell currently, however my build is behind a secure jenkins login so the risk of a leak is low. (execute line is ommited)
+
+![jenkins bash1 ](./images/jenkins2.jpg)
+![jenkins bash2 ](./images/jenkins3.jpg)
+
+# Known bugs and planned updates
+ - Information entered into decimal feilds is currently tempermental and needs refining
+ - Inclusion of drop down Choices for selecting receipts
+ - Stats table created and working 
+(to be added as they are discovered)
+
 
 
 
