@@ -6,12 +6,19 @@
 * [Trello](#trello)
 * [Risk Assessment](#risk-assessment)
 * [Entity Relationship Diagram](#entity-relationship-diagram)
-* [Development](#development))
-* [Testing](#testing)
-* [Unit Testing](#unit-testing)
-* [Integration]
-* [Bugs](#bugs)
+* [Development](#development)
+* [Virtual Machine, GCP, File format](#Virtual-Machine,-GCP,-File-format)
+* [Gitignore](#Gitignore)
+* [Creating and populating tables](#Creating-and-populating-tables)
+* [Forms and HTML](#Forms-and-HTML)
+* [Routes](#routes)
+* [Frontend](#Frontend)
+* [linking Routes and database with frontend](#linking-Routes-and-database-with-frontend)
+* [Testing](#testing) 
+* [gunicorn](#gunicorn)
 * [Jenkins](#jenkins)
+* [Known bugs and planned updates](#bugs)
+
 
 # Introduction
 This project was to create two or more databases with a relationship, demonstrate good coding practice, and create a working website with emphasis on CRUD functionality.
@@ -99,7 +106,7 @@ At this point i was testing the functions of routes:
   - Navigating pages 
   - CRUD functionality on all current HTML pages works as intended.
 
-# Testing
+## Testing
 Created a test_app.py to test functionality of routes and created validaors (to be implemented).
 Tests cover: 
   - Building database and tables
@@ -118,7 +125,12 @@ Current test coverage
 
 Test coverage is currently too low for deployment and needs to be improved.
 
-# Jenkins
+## Gunicorn 
+Was installed and run as intended to test stability. run successfully for a time and website saw no issues with the implemented workers.
+
+![gunicorn](./images/gunicorn.jpeg)
+
+## Jenkins
 Jenkins is being utilised to setup and deploy working versions of my app and is working in its current state.
 Script was added, with permissions changed to execute and run. After logging in successfully i created my build. Furthermore i had to edit my sudo visudo to add jenkins permissions before it would run successfully
 
@@ -131,7 +143,7 @@ My db instance is used in execute bash shell currently, however my build is behi
 
 Jenkins requires further implementation of webhooks and architecture to save build versions as zip files.
 
-# Known bugs and planned updates
+# Bugs 
  - Information entered into decimal feilds is currently tempermental and needs refining
  - Inclusion of drop down Choices for selecting receipts
  - Stats table created and working 
