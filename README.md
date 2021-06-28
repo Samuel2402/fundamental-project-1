@@ -135,6 +135,8 @@ Jenkins requires further implementation of webhooks and architecture to save bui
  - Information entered into decimal feilds is currently tempermental and needs refining
  - Inclusion of drop down Choices for selecting receipts
  - Stats table created and working 
+ - Date not entering correctly (shows None)
+
 (to be added as they are discovered)
 
 

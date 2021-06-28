@@ -84,7 +84,7 @@ def read_receipts():
     receipts_string = ""
     all_receipts = Receipts.query.order_by(Receipts.id.desc()).all()
     for receipts in all_receipts:
-        receipts_string += "<br>" + "Receipt id : " + str(receipts.id) + "    |    " + "Most Exp item : " + str(receipts.most_expensive) + "    |    " + "Cost of alcohol : " + str(receipts.cost_of_alcohol) + "    |    " + "Receipt total : " + str(receipts.receipt_total) + "    |    " + str(receipts.date_of_receipt) + "    |    " + "Takeaway : " + str(receipts.takeaway) + "    |    " + "Delivery Fee : " + str(receipts.delivery_fee) + "    |    "+ "Delivery time (mins) : "  + str(receipts.delivery_time_mins) + "    |    " + "Store name:" + str(receipts.store_id) 
+        receipts_string += "<br>" + "Receipt id : " + str(receipts.id) + "    |    " + "Most Exp item : " + str(receipts.most_expensive) + "    |    " + "Cost of alcohol : " + str(receipts.cost_of_alcohol) + "    |    " + "Receipt total : " + str(receipts.receipt_total) + "    |    " + str(receipts.date_of_receipt) + "    |    " + "Takeaway : " + str(receipts.takeaway) + "    |    " + "Delivery Fee : " + str(receipts.delivery_fee) + "    |    "+ "Delivery time (mins) : "  + str(receipts.delivery_time_mins) + "    |    " + "Store id:" + str(receipts.store_id) 
     return render_template('readreceipts.html') + receipts_string
 
 @app.route('/readstore', methods=['GET'])
