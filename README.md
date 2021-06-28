@@ -28,6 +28,10 @@ My trello board was updated as the project developed, however it is still only a
 
 ![Developed Trello board design](./images/final-trello.jpg)
 
+Final trello board at projects end:
+
+![Trello board final](./images/new-final-trello.jpg)
+
 # Risk Assessment
 I created a Risk Assesment before beginning my project to highlight potential risks that i have identified. 
 
@@ -124,6 +128,8 @@ My db instance is used in execute bash shell currently, however my build is behi
 
 ![jenkins bash1 ](./images/jenkins2.jpg)
 ![jenkins bash2 ](./images/jenkins3.jpg)
+
+Jenkins requires further implementation of webhooks and architecture to save build versions as zip files.
 
 # Known bugs and planned updates
  - Information entered into decimal feilds is currently tempermental and needs refining
